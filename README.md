@@ -1,6 +1,7 @@
 # Spotify SPA website
 
 A simple SPA website using Spotify's website/desktop concept as base.
+<b>* JUST FOR EDUCATIONAL PURPOSES ONLY. </b>
 
 ## Getting Started
 

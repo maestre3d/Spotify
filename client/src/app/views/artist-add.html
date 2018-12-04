@@ -1,0 +1,40 @@
+<div *ngIf="identity && identity.role == 'ROLE_ADMIN'" class="col-lg-6 circular-bold container log-form" style="padding-bottom: 5%; padding-top: 3%;">
+    <div class="alert alert-success" role="alert" *ngIf="alertMessage">
+            <h5 class="alert-heading"><strong>Success!</strong></h5>
+            <p class="mb-0"><small>{{alertMessage}}</small></p>
+    </div>
+    <h1>{{title}}</h1>
+    <form #formArtist="ngForm" (ngSubmit)="onSubmit()" class="col-md-6 btn-nav champions-light">
+        <p>
+        <label>Name</label>
+        <input type="text" class="form-control form-spot" #name="ngModel" name="name" [(ngModel)]="artist.name" placeholder="Name"  required />
+        <span *ngIf="!name.valid && name.touched" class="badge badge-danger">
+            Name not valid
+        </span>
+        </p>
+        <p>
+        <label>Description</label>
+        <textarea class="form-control form-spot" #description="ngModel" name="description" [(ngModel)]="artist.description" placeholder="Description" required ></textarea>
+        <span *ngIf="!description.valid && description.touched" class="badge badge-danger">
+            Description not valid
+        </span>
+        </p>
+        <div *ngIf="is_edit" class="image_for_edit" >
+            <img *ngIf="artist.image != 'null'" class="img-fluid img-circle" src="{{url + 'get-image-artist/' + artist.image}}"  alt="artist-pic" style="width: 75px; height: 75px;">
+        
+        <p>
+            <label>Artist picture</label>
+            <input type="file" class="form-control-file" id="artist_pic" (change)="fileChangeEvent($event)" /> 
+        </p>
+        </div>
+        <input type="submit" value="{{title}}"  class="btn  btn-block  btn-spot champions-bold" [disabled]="!formArtist.form.valid" />
+    </form>
+</div>
+
+<div *ngIf="!identity || identity.role != 'ROLE_ADMIN'" class="col-lg-6 circular-bold container back-log log-form" style="padding-bottom: 15%; padding-top: 3%;">
+    <div class="col-md-6 btn-nav champions-light">
+        <h1><i class="fas fa-user-lock"></i></h1>
+        <h1>Error</h1>
+        <h3>Forbidden user.</h3>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div *ngIf="identity && identity.role == 'ROLE_ADMIN'" class="col-lg-6 circular-bold container log-form" style="padding-bottom: 5%; padding-top: 3%;">
+        <div class="alert alert-success" role="alert" *ngIf="alertMessage">
+                <h5 class="alert-heading"><strong>Success!</strong></h5>
+                <p class="mb-0"><small>{{alertMessage}}</small></p>
+        </div>
+        <h1>{{pTitle}}</h1>
+        <form #formAlbum="ngForm" (ngSubmit)="onSubmit()" class="col-md-6 btn-nav champions-light">
+            <p>
+            <label>Title</label>
+            <input type="text" class="form-control form-spot" #title="ngModel" name="title" [(ngModel)]="album.title" placeholder="Title"  required />
+            <span *ngIf="!title.valid && title.touched" class="badge badge-danger">
+                Title not valid
+            </span>
+            </p>
+            <p>
+            <label>Year</label>
+            <input type="text" class="form-control form-spot" #year="ngModel" name="year" [(ngModel)]="album.year" placeholder="Year"  required />
+            <span *ngIf="!year.valid && year.touched" class="badge badge-danger">
+                Year not valid
+            </span>
+            </p>
+            <p>
+            <label>Description</label>
+            <textarea class="form-control form-spot" #description="ngModel" name="description" [(ngModel)]="album.description" placeholder="Description" required ></textarea>
+            <span *ngIf="!description.valid && description.touched" class="badge badge-danger">
+                Description not valid
+            </span>
+            </p>
+
+            <div *ngIf="is_edit" class="image_for_edit" >
+                <img *ngIf="album.image != 'null'" class="img-fluid" src="{{url + 'get-image-album/' + album.image}}"  alt="album-pic" style="width: 150px; height: 150px;">
+                
+                <p>
+                    <label>Album picture</label>
+                    <input type="file" class="form-control-file" id="artist_pic" (change)="fileChangeEvent($event)" /> 
+                </p>
+            </div>
+
+            <input type="submit" value="{{pTitle}}"  class="btn  btn-block  btn-spot champions-bold" [disabled]="!formAlbum.form.valid"  />
+        </form>
+    </div>
+    
+    <div *ngIf="!identity || identity.role != 'ROLE_ADMIN'" class="col-lg-6 circular-bold container back-log log-form" style="padding-bottom: 15%; padding-top: 3%;">
+        <div class="col-md-6 btn-nav champions-light">
+            <h1><i class="fas fa-user-lock"></i></h1>
+            <h1>Error</h1>
+            <h3>Forbidden user.</h3>
+        </div>
+    </div>

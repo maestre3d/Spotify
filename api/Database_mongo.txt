@@ -1,0 +1,21 @@
+// How to create MongoDB database for this project
+
+- Init mongo demon
+    For Windows:
+        *   ("mongod.exe");
+    For Linux:
+        *   -> sudo service mongod start
+
+- Init mongo shell 
+    For Windows:
+        *   ("mongo.exe");
+    For Linux:
+        *   -> mongo --host 127.0.0.1:27017
+
+
+// Create database command
+-> Show dbs
+-> Use mean
+
+// Insert a document to the "Artists" collection
+-> db.artists.save({"name":"Luis Miguel", "description":"El Sol de México", "image":"null"});

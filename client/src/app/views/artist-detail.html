@@ -1,0 +1,76 @@
+
+
+<div *ngIf="artist" class="artist-header circular-bold">
+    
+        <div class=" clear-filter" style="text-align: center">
+            <div class="page-header-image" data-parallax="true">
+            </div>
+            <div class="container">
+                <div class="photo-container">
+                    <img *ngIf="artist.image === 'null'" class="img-fluid img-circle" src="../assets/img/generic/generic-user.jpg" style="width: 200px; height: 200px;">
+                    <img *ngIf="artist.image" class="img-fluid img-circle" src="{{url + 'get-image-artist/' + artist.image}}"  alt="" style="width: 200px; height: 200px;">
+                </div>
+                <h3 class="title">{{artist.name}}</h3>
+                <p class="category">{{artist.description}}</p>
+            </div>
+        </div>
+        <div class="button-container" style="text-align: center;" >
+            <a class="btn btn-default btn-round btn-lg btn-folllow" href="">Follow</a>
+            <a href="" class="btn btn-default btn-round btn-lg btn-icon"  title="Follow {{artist.name}} on Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="" class="btn btn-default btn-round btn-lg btn-icon"  title="Follow {{artist.name}} on Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a [routerLink]="['/create-album', artist._id]" *ngIf="identity.role == 'ROLE_ADMIN'" class="btn btn-default btn-round btn-lg btn-icon"  title="Add {{artist.name}}'s new album">
+                <i class="fas fa-user-plus"></i>
+            </a>
+        </div>
+              
+ 
+</div>
+
+<div *ngIf="albums" class="albums-body ">
+    <ul class="artist-list  circular-bold log-form row">
+        <li *ngFor="let album of albums" class="col-md-4 artist-item">
+            <div class="artist-image">
+                <a  href="">
+                    <img *ngIf="album.image" src="{{url + 'get-image-album/' + album.image}}" alt="">
+                    <img *ngIf="album.image === 'null'"  src="../assets/img/generic/generic-album.png" >
+                </a>
+            </div>
+            <div class="artist-name">
+                <a href="">{{album.title}}</a>
+                <div class="artist-btns row  container">
+                        <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+                            <a [routerLink]="['/edit-album', album._id]" class="btn btn-lg btn-edit">Edit</a>
+                        </div>
+                        <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+                            <a (click)="onDeleteConfirm(album._id)" class="btn btn-lg btn-delete">Delete</a>
+                        </div>
+                        <div class="confirm" *ngIf="confirmed === album._id" style="margin: 1%">
+                            <a (click)="onDeleteArtist(album._id)" class="btn btn-lg btn-danger">Confirm</a>
+                            <a (click)="onCancel()" class="btn btn-lg btn-primary">Cancel</a>
+                        </div>
+                    </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<div *ngIf="noAlbum === true" class="albums-body" style="padding-bottom: 15%; padding-top: 3%;">
+        <div class="champions-light">
+            <h1></h1>
+            <h1> <i class="fab fa-searchengin"></i>   Error</h1>
+            <h3>{{alertMessage}}.</h3>
+        </div>
+    </div>
+
+<div *ngIf="!artist" class="col-lg-6 circular-bold container back-log log-form" style="padding-bottom: 15%; padding-top: 3%;">
+    <div class="col-md-6 btn-nav champions-light">
+        <h1></h1>
+        <h1> <i class="fas fa-user-times"></i>   Error</h1>
+        <h3>Artist not found.</h3>
+    </div>
+</div>

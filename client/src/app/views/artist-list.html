@@ -1,0 +1,59 @@
+<div class="col-lg-8 col-lg-offset-2 circular-bold container log-form" *ngIf="identity" style="padding-bottom: 1%;">
+    <h1>{{title}}</h1>
+    <a *ngIf="identity.role === 'ROLE_ADMIN'" class="btn btn-default btn-spot" [routerLink]="['/new-artist']">Add artist</a>
+    <!--<ul class="pagination pull-right">
+        <li><a [routerLink]="['/artists/', prev_page]">&laquo;</a></li>
+        <li><a [routerLink]="['/artists/', next_page]">&raquo;</a></li>
+    </ul>-->
+</div>
+
+<div class="container">
+    <ul class="artist-list circular-bold log-form row" *ngIf="identity">
+        <li *ngFor="let artist of artists" class="col-md-4 artist-item">
+            <div class="artist-image" style="">
+                <a [routerLink]="['/artist', artist._id]">
+                    <img *ngIf="artist.image === 'null'" class="img-fluid img-circle" src="../assets/img/generic/generic-user.jpg">
+                    <img *ngIf="artist.image" class="img-fluid img-circle" src="{{url + 'get-image-artist/' + artist.image}}"  alt="">
+                </a>
+            </div>
+            <div class="artist-name">
+                <a [routerLink]="['/artist', artist._id]">{{artist.name}}</a>
+                <div class="artist-btns row  container">
+                    <div class="buttons" *ngIf="identity.role === 'ROLE_ADMIN'">
+                        <a [routerLink]="['/edit-artist', artist._id]" class="btn btn-lg btn-edit">Edit</a>
+                    </div>
+                    <div class="buttons" *ngIf="identity.role === 'ROLE_ADMIN'">
+                        <a (click)="onDeleteConfirm(artist._id)" class="btn btn-lg btn-delete">Delete</a>
+                    </div>
+                    <div class="confirm" *ngIf="confirmed === artist._id">
+                        <a (click)="onDeleteArtist(artist._id)" class="btn btn-lg btn-danger">Confirm</a>
+                        <a (click)="onCancel()" class="btn btn-lg btn-primary">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="col-lg-8 col-lg-offset-2 circular-bold container log-form">
+        <nav aria-label="Page navigation">
+                <ul class="pagination pull-right justify-content-center" style="text-align: center">
+                  <li class="page-item">
+                    <a class="page-link" [routerLink]="['/artists/', prev_page]" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only  page-dark">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" [routerLink]="['/artists/1']">1</a></li>
+                  <li class="page-item"><a class="page-link" [routerLink]="['/artists/2']">2</a></li>
+                  <li class="page-item"><a class="page-link" [routerLink]="['/artists/3']">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" [routerLink]="['/artists/', next_page]" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+            </nav>
+</div>
+

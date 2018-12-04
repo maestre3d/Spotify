@@ -1,0 +1,162 @@
+<!-- Nav -->
+<div *ngIf="!identity">
+    <header class="navbar navbar-dark bg-dark navbar-default navbar-fixed-top navbar-expand-lg" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/img/logos/Spotify_Logo_RGB_White.png" class="nav-logo" alt="Spotify">
+            </a>
+        </div>
+        <nav id="navbar-nav" class="" role="navigation">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+                <form class="form-inline" style="">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-spot champions-light" placeholder="@Username" aria-label="Username" aria-describedby="basic-addon1" style="margin-right: 3%;">
+                   </div>
+                   <button class="btn btn-outline-success btn-nav my-2 my-sm-0 champions-light" type="submit"><span class="fas fa-search"></span>      Search</button>
+                </form>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+</div>
+
+<!-- Nav Logged -->
+<div *ngIf="identity">
+    <header class="navbar navbar-dark bg-dark navbar-default navbar-fixed-top navbar-expand-lg" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" [routerLink]="['/']">
+                <img src="../assets/img/logos/Spotify_Logo_RGB_White.png" class="nav-logo" alt="Spotify">
+            </a>
+        </div>
+        <nav id="navbar-nav" class="champions-light" role="navigation">
+          <ul class="nav navbar-nav navbar-right nav-main mr-auto">
+            <li  class="nav-item">
+                <form class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-spot champions-light" placeholder="@Username" aria-label="Username" aria-describedby="basic-addon1" style="margin-right: 3%;">
+                   </div>
+                   <button class="btn btn-outline-success btn-nav my-2 my-sm-0 circular-book" type="submit"><span class="fas fa-search"></span>      Search</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <a [routerLink]="['/artists', 1]" [routerLinkActive]="['actived']">
+                    <!--<span class="fas fa-star" aria-hidden="true"></span>-->
+                    Artists
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#">
+                    <!--<span class="fas fa-book" aria-hidden="true"></span>-->
+                    Albums
+                </a>
+            </li>
+            <!-- <li class="divider-vertical" role="separator"></li> -->
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img *ngIf="identity.image" id="user_pic_nav" class="img-fluid img-circle" src="{{url + 'get-image-user/' + identity.image}}"  alt="profile-pic" style="width: 60px; height: 60px; padding-right: 3%;">
+                    <img *ngIf="!identity.image" id="user_pic_nav" class="img-fluid img-circle" src="../assets/img/now/default-avatar.png"  alt="profile-pic" style="width: 60px; height: 60px; padding-right: 3%;">
+                    {{identity.name}}
+                </a>
+                  <div class="dropdown-menu champions-light" aria-labelledby="navbarDropdown">
+                    <li class="dropdown-header" id="identity_nameP">{{identity.name}}'s profile</li>
+
+                    <a class="dropdown-item" href="" [routerLink]="['/user-data']"><i class="fas fa-cog"></i>    Edit Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="" (click)="logout()"><span><i class="fas fa-sign-out-alt"></i></span> Log Out</a>
+                  </div>
+            </li>
+            <!--
+            <li class="nav-item">
+                <form class="form-inline" style="">
+                    <span class="btn btn-primary btn-block btn-dark btn-spot"><span><i class="fas fa-star"></i></span>  Get VIP</span>
+               </form>
+            </li> -->
+          </ul>
+        </nav>
+      </div>
+    </header>
+</div>
+
+
+
+
+<!-- Logged data -->
+
+<div [class.hidden]="!identity" class="back-log grad">
+    <router-outlet></router-outlet>
+</div>
+
+
+<!-- NO USER - LOGIN/SIGNUP -->
+<div class="col-lg-12 circular-book" *ngIf="!identity" style="padding: 1%; text-align: center;">
+    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+      <h5 class="alert-heading"><i class="fas fa-exclamation-triangle"></i><strong>    Error!</strong></h5>
+      <p class="mb-0"><small>{{errorMessage}}</small></p>
+    </div>
+    <div class="alert alert-success" role="alert" *ngIf="alertRegister">
+      <h5 class="alert-heading"><strong>Success!</strong></h5>
+      <p class="mb-0"><small>{{alertRegister}}</small></p>
+    </div>
+    <div class="col-lg-12 div-spot circular-bold"  style="align-content: center;">
+        <div class="col-lg-6" id="logIn">
+          <h1>Log In</h1>
+      
+
+          <form #loginform="ngForm" (ngSubmit)="onSubmit()"  class="col-md-6 btn-nav form-green champions-light">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control form-spot"  aria-describedby="emailHelp" placeholder="Enter email" required />
+                <span *ngIf="!email.valid && email.touched" class="badge badge-danger">
+                  Email not valid
+                </span>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" class="form-control form-spot" placeholder="Password" required />
+              </div>
+              <input type="submit" value="Log In" class="btn btn-block btn-spot champions-bold" [disabled]="!loginform.form.valid" />
+            </form>
+      
+        </div>
+        <div class="col-lg-6" id="SignUp">
+          <h1>Sign Up</h1>
+          <form #registerform="ngForm" (ngSubmit)="onSubmitSign()" class="col-md-6 btn-nav form-green champions-light">
+              <p>
+                <label>Name</label>
+                <input type="text" class="form-control form-spot" #name="ngModel" name="name" [(ngModel)]="user_register.name" placeholder="Name"  required />
+                <span *ngIf="!name.valid && name.touched" class="badge badge-danger">
+                  Name not valid
+                </span>
+              </p>
+              <p>
+                <label>Last Name</label>
+                <input type="text" class="form-control form-spot" #surname="ngModel" name="surname" [(ngModel)]="user_register.surname" placeholder="Last name" required />
+                <span *ngIf="!surname.valid && surname.touched" class="badge badge-danger">
+                  Last Name not valid
+                </span>
+              </p>
+              <p>
+                <label>Email</label>
+                <input type="email" class="form-control form-spot" #email_sign="ngModel" name="email_sign" [(ngModel)]="user_register.email" placeholder="Enter your Email" required />
+                <span *ngIf="!email_sign.valid && email_sign.touched" class="badge badge-danger">
+                  Email not valid
+                </span>
+              </p>
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              <p>
+                <label>Password</label>
+                <input type="password" class="form-control form-spot" #password="ngModel" name="password" [(ngModel)]="user_register.password" placeholder="Enter your Password" required />
+                <span *ngIf="!password.valid && password.touched" class="badge badge-danger">
+                  Password not valid
+                </span>
+              </p>
+              <input type="submit" value="Sign Up" class="btn  btn-block  btn-spot champions-bold" [disabled]="!registerform.form.valid" />
+          </form>
+        </div>
+      </div>
+</div>

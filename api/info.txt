@@ -1,0 +1,10 @@
+                // Status 200 - Simple error
+                // Status 500 - Server Error/Data Not Saved/Exception
+                // Status 400 -  DB Error/File doesn't exists
+
+Middleware = Method that executes before controller's action
+MultiParty = Module that allows us to upload archives and send archives though HTTP Protocol
+Mongoose = JavaScript's MongoDB driver
+Express = Framework - Organize our webapp into an MVC architecture on the server side. (Ruby On Rails => Ruby)
+
+Linux additiob

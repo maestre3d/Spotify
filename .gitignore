@@ -1,0 +1,12 @@
+#IGNORE VSCODE FOLDER
+.vscode/*
+#IGNORE VSCODE WORKSPACE
+vscode_workspace.code-workspace
+#IGNORE NODE MODULES FOLDER
+/api/node_modules/*
+/client/node_modules/*
+#IGNORE UPLOADS
+/api/uploads/albums/*
+/api/uploads/artists/*
+/api/uploads/songs/*
+/api/uploads/users/*

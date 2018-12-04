@@ -1,0 +1,9 @@
+<header *ngIf="identity">
+    <div class="container">
+        <div class="intro-text">
+            <img class="img-fluid img-circle" src="{{url + 'get-image-user/' + identity.image}}"  alt="profile-pic" style="width: 200px; height: 200px;">
+            <div class="intro-heading circular-bold" id="identity_w">Welcome back, {{identity.name}} {{identity.surname}}.</div>
+            <a [routerLink]="['/artists', 1]" class="page-scroll btn btn-spot circular-bold" style="letter-spacing: 2px; font-size: smaller;">LISTEN TO MUSIC</a>
+        </div>
+    </div>
+</header>

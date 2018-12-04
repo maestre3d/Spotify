@@ -1,0 +1,12 @@
+// To uninstall a dependency
+    PD. Used mongoose dependency as example
+
+-> npm uninstall mongoose --save
+
+// If you want to reinstall, copy the package.json line
+*   Ex.    "mongoose": "^5.3.2",
+    and add it again to your JSON file
+
+// npm command to install all the added dependencies on JSON file through file editing
+
+-> npm install

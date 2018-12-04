@@ -1,0 +1,48 @@
+
+<div *ngIf="identity" class="col-lg-6 circular-bold container log-form">
+    <div id="myAlert" class="alert alert-success " role="alert" *ngIf="alertMessage">
+        <a href="" class="close" data-dismiss="alert">&times;</a>
+        <h5 class="alert-heading"><strong>Success!</strong></h5>
+        <p class="mb-0"><small>{{alertMessage}}</small></p>
+    </div>
+    <h1>{{title}}</h1>
+    <form #updateform="ngForm" (ngSubmit)="onSubmit()" class="col-md-6 btn-nav champions-light">
+        <p>
+          <label>Name</label>
+          <input type="text" class="form-control form-spot" #name="ngModel" name="name" [(ngModel)]="user.name" placeholder="Name"  required />
+          <span *ngIf="!name.valid && name.touched" class="badge badge-danger">
+            Name not valid
+          </span>
+        </p>
+        <p>
+          <label>Last Name</label>
+          <input type="text" class="form-control form-spot" #surname="ngModel" name="surname" [(ngModel)]="user.surname" placeholder="Last name" required />
+          <span *ngIf="!surname.valid && surname.touched" class="badge badge-danger">
+            Last Name not valid
+          </span>
+        </p>
+        <p>
+          <label>Email</label>
+          <input type="email" class="form-control form-spot" #email_sign="ngModel" name="email_sign" [(ngModel)]="user.email" placeholder="Enter your Email" aria-describedby="emailHelp" required />
+          <span *ngIf="!email_sign.valid && email_sign.touched" class="badge badge-danger">
+            Email not valid
+          </span>
+        </p>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+            <img class="img-fluid img-circle" src="{{url + 'get-image-user/' + user.image}}"  alt="profile-pic" style="width: 75px; height: 75px;">
+        </div>
+        <p>
+            <label>Profile picture</label>
+            <input type="file" class="form-control-file" id="user_pic" (change)="fileChangeEvent($event)" /> 
+        </p>
+        <input id="btnSubmit" type="submit" value="Update Profile" class="btn  btn-block  btn-spot champions-bold" />
+    </form>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#btnSubmit').click(function () {
+          $('#myAlert').show('fade');
+        });
+      });
+    </script>
+</div>

@@ -116,7 +116,7 @@ This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](http
 
 ## Acknowledgments
 
-* [Spotify Dev team](https://developer.spotify.com/documentation/)
+* [Spotify Developers](https://developer.spotify.com/documentation/)
 * [Victor Robles](https://victorroblesweb.es/)
 * [Creative Tim](https://www.creative-tim.com/)
 * [Spotify Branding](https://developer.spotify.com/branding-guidelines/)

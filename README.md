@@ -112,7 +112,7 @@ See also the list of [contributors](https://gitlab.com/maestre3d/spotify-mean/gr
 
 ## License
 
-This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](https://gitlab.com/maestre3d/spotify-mean/blob/master/LICENSE.md) file for details
+This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](https://gitlab.com/maestre3d/spotify-mean/blob/master/LICENSE) file for details
 
 ## Acknowledgments
 
